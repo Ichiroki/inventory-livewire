@@ -1,10 +1,10 @@
 <div>
     <div class="mb-3">
-        <x-button type="button" data-modal-target="create-modal" data-modal-toggle="create-modal">Create New Item</x-button>
+        <x-button type="button" data-modal-target="create-incoming-modal" data-modal-toggle="create-incoming-modal">Add Incoming Item</x-button>
         @teleport('body')
-        <x-modal id="create-modal" :method='"save"'>
+        <x-modal id="create-incoming-modal" :method='"save"'>
             <x-slot name="header">
-                Add New Items
+                Add Incoming Item
             </x-slot>
             <x-slot name="content">
                     <div class="col-span-2">
@@ -72,5 +72,8 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="mt-3">
+        {{ $barangs->links() }}
     </div>
 </div>

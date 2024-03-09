@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Models\Barang;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Masuk extends Model
+class Barang extends Model
 {
-    use HasFactory;
-
-    protected $tables = "barang-masuk";
+    protected $table = 'items';
 
     protected $fillable = [
         'name',
         'unit'
     ];
+
+    use HasFactory;
 }

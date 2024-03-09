@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Livewire\BarangMasuk;
+use App\Models\Barang;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -19,11 +20,9 @@ class BarangForm extends Form
     public int $unit = 0;
 
     public function store() {
-        // @dd($this->validate());
-        DB::table('barang-masuk')->insert([
-          "name" => $this->validate()['name'],
-          "unit" => $this->validate()['unit'],
-        ]);
+        $this->validate();
+
+        Barang::create($this->all());
 
         $this->reset();
     }
