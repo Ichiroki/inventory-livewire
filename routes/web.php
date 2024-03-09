@@ -1,17 +1,8 @@
 <?php
 
+use App\Http\Controllers\MasukController;
+use App\Livewire\Barang\Masuk\Create;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,8 +18,10 @@ Route::middleware([
     })->name('dashboard');
 
     Route::prefix('barang')->group(function() {
-        Route::get('/masuk', function() {
-            return view('pages/barang/masuk');
-        })->name('barang-masuk');
+        Route::prefix('/masuk')->group(function() {
+            Route::get('/', [MasukController::class, 'index'])->name('barang-masuk');
+
+            Route::get('/create', Create::class)->name('barang-masuk-create');
+        });
     });
 });
