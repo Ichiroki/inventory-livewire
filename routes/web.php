@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MasukController;
 use App\Livewire\Barang\Masuk\Create;
 use Illuminate\Support\Facades\Route;
@@ -17,11 +18,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::prefix('barang')->group(function() {
-        Route::prefix('/masuk')->group(function() {
-            Route::get('/', [MasukController::class, 'index'])->name('barang-masuk');
-
-            Route::get('/create', Create::class)->name('barang-masuk-create');
-        });
+    Route::prefix('item')->group(function() {
+        Route::get('/list', [ItemController::class, 'list'])->name('items-list');
+        Route::get('/incoming', [ItemController::class,'incoming'])->name('items-incoming');
     });
 });

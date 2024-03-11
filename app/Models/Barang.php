@@ -14,5 +14,9 @@ class Barang extends Model
         'unit'
     ];
 
+    // public function incomings() {
+    //     return $this->hasMany(Incoming::class);
+    // }
+
     use HasFactory;
 }

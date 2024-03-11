@@ -8,11 +8,22 @@ use Livewire\Component;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class BarangMasuk extends Component
+class ItemsList extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
     public BarangForm $form;
+
+    protected $updatedQueryString = [
+        ['search' => ['except' => '']],
+        ['page' => ['except' => 1]
+    ]];
+
+    public $search;
+
+    protected $listeners = [
+        'save'
+    ];
 
     public function save() {
         $this->form->store();
@@ -22,9 +33,16 @@ class BarangMasuk extends Component
 
     public function render()
     {
+
         $barangs = Barang::latest()->paginate(5);
 
-        return view('livewire.barang-masuk', [
+        if($this->search !== null) {
+            $barangs = Barang::where('name', 'like', '%' . $this->search . '%')
+                    ->latest()
+                    ->paginate(5);
+        }
+
+        return view('livewire.items-list', [
             'barangs' => $barangs
         ]);
     }

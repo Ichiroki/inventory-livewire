@@ -19,11 +19,12 @@
                         <x-slot name="trigger">
                             <button type="button"
                                 class="inline-flex items-center mt-[1rem] px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                Barang
+                                Item
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <x-dropdown-link wire:navigate href="{{ route('barang-masuk') }}">Masuk</x-dropdown-link>
+                            <x-dropdown-link wire:navigate href="{{ route('items-list') }}">List</x-dropdown-link>
+                            <x-dropdown-link wire:navigate href="{{ route('items-incoming') }}">Incoming</x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>
