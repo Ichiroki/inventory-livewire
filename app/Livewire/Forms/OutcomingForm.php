@@ -7,18 +7,19 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class IncomingForm extends Form
+class OutcomingForm extends Form
 {
     public $item;
-    #[Validate('required')]
-    public int $item_id = 1;
 
     #[Validate('required')]
-    public $quantity;
+    public int $item_id;
 
-    public function mount(int $quantity) {
+    #[Validate('required')]
+    public int $qty;
+
+    public function mount(int $qty) {
         $this->item = Barang::all();
-        $this->quantity = $quantity;
+        $this->qty = $qty;
     }
 
     public function store() {
@@ -26,7 +27,7 @@ class IncomingForm extends Form
 
         $item = Barang::findOrFail($validated['item_id']);
 
-        $newQuantity = $item->quantity + $validated['quantity'];
+        $newQuantity = $item->quantity - $validated['quantity'];
 
         DB::table('incomings')->insert([
             'item_id' => $validated['item_id'],

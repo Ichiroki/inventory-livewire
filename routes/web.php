@@ -21,5 +21,6 @@ Route::middleware([
     Route::prefix('item')->group(function() {
         Route::get('/list', [ItemController::class, 'list'])->name('items-list');
         Route::get('/incoming', [ItemController::class,'incoming'])->name('items-incoming');
+        Route::get('/outcoming', [ItemController::class,'outcoming'])->name('items-outcoming');
     });
 });

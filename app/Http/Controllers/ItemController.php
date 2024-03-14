@@ -13,4 +13,8 @@ class ItemController extends Controller
     public function incoming() {
         return view("pages.item.incoming-list");
     }
+
+    public function outcoming() {
+        return view("pages.item.outcoming");
+    }
 }

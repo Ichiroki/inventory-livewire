@@ -1,11 +1,11 @@
 <div>
     <div class="mb-3 flex justify-between items-center">
         <div>
-            <x-button type="button" data-modal-target="create-item-modal"
-                data-modal-toggle="create-item-modal">Add New Item</x-button>
+            <x-button type="button" data-modal-target="create-item-modal" data-modal-toggle="create-item-modal">Add New
+                Item</x-button>
             @teleport('body')
                 <x-modal id="create-item-modal" method='save'>
-                    <x-slot name="header">
+                    <x-slot name="title">
                         Add New Item
                     </x-slot>
                     <x-slot name="content">
@@ -20,12 +20,12 @@
                             @enderror
                         </div>
                         <div class="col-span-2">
-                            <label for="unit"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                            <input type="number" name="unit" wire:model='form.unit' id="unit"
+                            <label for="quantity"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
+                            <input type="number" name="quantity" wire:model='form.quantity' id="quantity"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product unit">
-                            @error('form.unit')
+                                placeholder="Type product quantity">
+                            @error('form.quantity')
                                 <x-input-error>{{ $messages }}</x-input-error>
                             @enderror
                         </div>
@@ -58,7 +58,8 @@
         <div class="flex gap-3">
             {{-- Yang aku tambahkan --}}
 
-            <input wire:model.debounce.500ms="search" type="text" placeholder="Search..." class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <input wire:model.debounce.500ms="search" type="text" placeholder="Search..."
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
             {{-- Yang aku tambahkan --}}
         </div>
@@ -74,7 +75,7 @@
                         Product Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Unit
+                        quantity
                     </th>
                 </tr>
             </thead>
@@ -94,7 +95,7 @@
                                 {{ $barang->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $barang->unit }}
+                                {{ $barang->quantity }}
                             </td>
                         </tr>
                     </div>

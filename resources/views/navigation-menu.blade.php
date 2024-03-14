@@ -24,7 +24,10 @@
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link wire:navigate href="{{ route('items-list') }}">List</x-dropdown-link>
-                            <x-dropdown-link wire:navigate href="{{ route('items-incoming') }}">Incoming</x-dropdown-link>
+                            <x-dropdown-link wire:navigate
+                                href="{{ route('items-incoming') }}">Incoming</x-dropdown-link>
+                            <x-dropdown-link wire:navigate
+                                href="{{ route('items-outcoming') }}">Outcoming</x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -200,7 +203,8 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();" wire:navigate>
+                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();"
+                        wire:navigate>
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>

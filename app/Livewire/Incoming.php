@@ -15,12 +15,16 @@ class Incoming extends Component
         $this->form->store();
     }
 
+    public function delete($id) {
+        ModelsIncoming::where('id', $id)->delete();
+
+        $this->reset();
+    }
+
     public function render()
     {
-        $incomings = ModelsIncoming::with(['item'])->get();
+        $incomings = ModelsIncoming::with(['item'])->latest()->paginate(5);
         $items = Barang::all();
-
-        // dd($incomings);
 
         return view('livewire.incoming', [
             'incomings' => $incomings,

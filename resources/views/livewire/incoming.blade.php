@@ -5,13 +5,15 @@
                 data-modal-toggle="create-incoming-modal">Add Incoming Item</x-button>
             @teleport('body')
                 <x-modal id="create-incoming-modal" method='save'>
-                    <x-slot name="header">
+                    <x-slot name="title">
                         Add Incoming Item
                     </x-slot>
                     <x-slot name="content">
                         <div class="col-span-2">
+                            <label for="item_id"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item</label>
                             <div class="relative">
-                                <select name="item_id" wire:model='form.item_id' class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                                <select name="item_id" wire:ignore.self wire:model='form.item_id' class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="item_id">
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -22,12 +24,12 @@
                             </div>
                         </div>
                         <div class="col-span-2">
-                            <label for="unit"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                            <input type="number" name="unit" wire:model='form.unit' id="unit"
+                            <label for="quantity"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
+                            <input type="number" name="quantity" wire:model='form.quantity' id="quantity"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product unit">
-                            @error('form.unit')
+                                placeholder="Type product quantity">
+                            @error('form.quantity')
                                 <x-input-error>{{ $messages }}</x-input-error>
                             @enderror
                         </div>
@@ -76,7 +78,7 @@
                         Product Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Unit
+                        Quantity
                     </th>
                 </tr>
             </thead>
@@ -98,6 +100,26 @@
                             <td class="px-6 py-4">
                                 {{ $incoming->quantity }}
                             </td>
+                            <td class="px-6 py-4">
+                                <div>
+                                    <x-button type="button" color="red" data-modal-target="delete-incoming-modal"
+                                    data-modal-toggle="delete-incoming-modal">Delete</x-button>
+                                    <x-modal method="delete({{ $incoming->id }})" id="delete-incoming-modal">
+                                        <x-slot name="title">
+                                            Delete Data
+                                        </x-slot>
+                                        <x-slot name="content">
+                                            <p class="text-xl text-center mb-3">
+                                                Are you sure want to delete this data ?
+                                            </p>
+                                            <div class="flex justify-end gap-3 border-t-2 pt-3">
+                                                <x-button type="submit" color="danger">Delete</x-button>
+                                                <x-button type="submit" color="primary" data-modal-toggle="delete-incoming-modal">No</x-button>
+                                            </div>
+                                        </x-slot>
+                                    </x-modal>
+                                </div>
+                            </td>
                         </tr>
                     </div>
                 @endforeach
@@ -105,6 +127,6 @@
         </table>
     </div>
     <div class="mt-3">
-        {{-- {{ $barangs->links() }} --}}
+        {{ $incomings->links() }}
     </div>
 </div>

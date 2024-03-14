@@ -15,31 +15,31 @@ class ItemsSeeder extends Seeder
     {
         Barang::create([
             'name' => "gelas 220ml",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "botol mini 220ml",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "botol 330ml",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "botol 550ml",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "botol 1500ml",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "new galon 19L",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
         Barang::create([
             'name' => "refill galon 19L",
-            'unit' => '100'
+            'quantity' => '100'
         ]);
     }
 }

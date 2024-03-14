@@ -27,8 +27,6 @@ class ItemsList extends Component
 
     public function save() {
         $this->form->store();
-
-        return $this->redirect('/barang/masuk');
     }
 
     public function render()
