@@ -10,7 +10,8 @@ use Livewire\Form;
 class IncomingForm extends Form
 {
     public $item;
-    #[Validate('required')]
+    #[Validate('required', message: "Item is required")]
+    #[Validate('exists:items,id', message: "This item was been listed")]
     public int $item_id = 1;
 
     #[Validate('required')]
@@ -28,13 +29,17 @@ class IncomingForm extends Form
 
         $newQuantity = $item->quantity + $validated['quantity'];
 
-        DB::table('incomings')->insert([
-            'item_id' => $validated['item_id'],
-            'quantity' => $newQuantity
-        ]);
+        if($newQuantity >= 1) {
+            DB::table('incomings')->insert([
+                'item_id' => $validated['item_id'],
+                'quantity' => $newQuantity
+            ]);
 
-        $item->update(['quantity' => $newQuantity]);
+            $item->update(['quantity' => $newQuantity]);
 
-        $this->reset();
+            $this->reset();
+        } else {
+            $this->addError('quantity', 'The quantity cannot be less than the original quantity');
+        }
     }
 }
