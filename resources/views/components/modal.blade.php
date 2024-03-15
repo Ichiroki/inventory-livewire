@@ -22,7 +22,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" wire:submit={{ $method }} novalidate>
+            <form class="p-4 md:p-5" wire:submit.prevent={{ $method }} novalidate>
                 <div class="flex flex-col gap-3 justify-center">
                     {{ $content }}
                 </div>

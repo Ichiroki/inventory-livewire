@@ -3,19 +3,36 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Barang;
+use Dotenv\Exception\ValidationException;
+// use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule as ValidationRule;
 use Livewire\Form;
 
 class IncomingForm extends Form
 {
     public $item;
-    #[Validate('required', message: "Item is required")]
-    #[Validate('exists:items,id', message: "This item was been listed")]
     public int $item_id = 1;
-
-    #[Validate('required')]
     public $quantity;
+
+    public function rules() {
+        return [
+            'item_id' => [
+                'required',
+                ValidationRule::exists('items', 'id'),
+            ],
+            'quantity' => 'required|integer|min:1'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'quantity.required' => "Quantity is required",
+            'quantity.integer' => "Quantity is must numeric character",
+            'quantity.min' => "Quantity cannot be less than 1"
+        ];
+    }
 
     public function mount(int $quantity) {
         $this->item = Barang::all();
@@ -23,13 +40,13 @@ class IncomingForm extends Form
     }
 
     public function store() {
-        $validated = $this->validate();
+        try {
+            $validated = $this->validate();
 
-        $item = Barang::findOrFail($validated['item_id']);
+            $item = Barang::findOrFail($validated['item_id']);
 
-        $newQuantity = $item->quantity + $validated['quantity'];
+            $newQuantity = $item->quantity + $validated['quantity'];
 
-        if($newQuantity >= 1) {
             DB::table('incomings')->insert([
                 'item_id' => $validated['item_id'],
                 'quantity' => $newQuantity
@@ -38,8 +55,8 @@ class IncomingForm extends Form
             $item->update(['quantity' => $newQuantity]);
 
             $this->reset();
-        } else {
-            $this->addError('quantity', 'The quantity cannot be less than the original quantity');
+        } catch (ValidationException $e) {
+            echo $e;
         }
     }
 }

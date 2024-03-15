@@ -11,7 +11,7 @@ class Barang extends Model
 
     protected $fillable = [
         'name',
-        'unit'
+        'quantity'
     ];
 
     // public function incomings() {

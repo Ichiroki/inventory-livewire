@@ -13,25 +13,24 @@
                             <label for="item_id"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item</label>
                             <div class="relative">
-                                <select name="item_id" wire:ignore.self wire:model='form.item_id' class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="item_id">
+                                <select name="item_id" wire:ignore.self wire:model.blur='form.item_id' class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="item_id">
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <x-input-error for="form.item_id"/>
+                                {{-- <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-span-2">
                             <label for="quantity"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
-                            <input type="number" min="1" max="200" name="quantity" wire:model='form.quantity' id="quantity"
+                            <input type="number" min="1" max="200" name="quantity" wire:model.blur='form.quantity' id="quantity"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Type product quantity">
-                            @error('form.quantity')
-                                <x-input-error>{{ $messages }}</x-input-error>
-                            @enderror
+                            <x-input-error for="form.quantity" />
                         </div>
                         <div class="flex justify-between items-center">
                             <x-button type="submit" color="primary">
@@ -87,6 +86,7 @@
                 </tr>
             </thead>
             <tbody>
+                {{-- Datanya --}}
                 @php
                     $i = 1;
                 @endphp
@@ -127,6 +127,7 @@
                         </tr>
                     </div>
                 @endforeach
+                {{-- Datanya --}}
             </tbody>
         </table>
     </div>
