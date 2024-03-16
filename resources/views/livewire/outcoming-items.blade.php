@@ -6,7 +6,7 @@
             @teleport('body')
                 <x-modal id="create-item-modal" method='save'>
                     <x-slot name="title">
-                        Add New Outcoming
+                        Add Outcoming Item
                     </x-slot>
                     <x-slot name="content">
                         <div class="col-span-2">
@@ -73,6 +73,9 @@
                     <th scope="col" class="px-6 py-3">
                         Quantity
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -97,7 +100,7 @@
                                 <div>
                                     <x-button type="button" color="red" data-modal-target="delete-outcoming-modal"
                                     data-modal-toggle="delete-outcoming-modal">Delete</x-button>
-                                    <x-modal method="delete({{ $outcoming->id }})" id="delete-outcoming-modal">
+                                    <x-modal method="delete({{ $outcoming->item_id }})" id="delete-outcoming-modal">
                                         <x-slot name="title">
                                             Delete Data
                                         </x-slot>

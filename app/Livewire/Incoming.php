@@ -16,7 +16,7 @@ class Incoming extends Component
     }
 
     public function delete($id) {
-        ModelsIncoming::where('id', $id)->delete();
+        ModelsIncoming::where('item_id', $id)->delete();
 
         $this->reset();
     }
