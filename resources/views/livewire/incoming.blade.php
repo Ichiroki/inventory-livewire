@@ -19,9 +19,6 @@
                                     @endforeach
                                 </select>
                                 <x-input-error for="form.item_id"/>
-                                {{-- <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div> --}}
                             </div>
                         </div>
                         <div class="col-span-2">
@@ -63,11 +60,7 @@
             @endteleport
         </div>
         <div class="flex gap-3">
-            {{-- Yang aku tambahkan --}}
-
-            <input wire:model.debounce.500ms="search" type="text" placeholder="Search..." class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-
-            {{-- Yang aku tambahkan --}}
+            <input wire:model.live="search" type="text" placeholder="Search..." class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
         </div>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

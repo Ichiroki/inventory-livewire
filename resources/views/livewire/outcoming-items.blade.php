@@ -2,32 +2,32 @@
     <div class="mb-3 flex justify-between items-center">
         <div>
             <x-button type="button" data-modal-target="create-item-modal" data-modal-toggle="create-item-modal">Add New
-                Item</x-button>
+                Outcoming</x-button>
             @teleport('body')
                 <x-modal id="create-item-modal" method='save'>
-                    <x-slot name="header">
-                        Add New Item
+                    <x-slot name="title">
+                        Add New Outcoming
                     </x-slot>
                     <x-slot name="content">
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" wire:model='form.name' id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product name">
-                            @error('form.name')
-                                <x-input-error>{{ $messages }}</x-input-error>
-                            @enderror
+                            <label for="item_id"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item</label>
+                            <div class="relative">
+                                <select name="item_id" wire:ignore.self wire:model.blur='form.item_id' class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="item_id">
+                                    @foreach ($items as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="form.item_id" />
+                            </div>
                         </div>
                         <div class="col-span-2">
-                            <label for="unit"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                            <input type="number" name="unit" wire:model='form.unit' id="unit"
+                            <label for="quantity"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
+                            <input type="number" name="quantity" wire:model='form.quantity' id="quantity"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product unit">
-                            @error('form.unit')
-                                <x-input-error>{{ $messages }}</x-input-error>
-                            @enderror
+                                placeholder="Type product quantity">
+                                <x-input-error for="form.quantity" />
                         </div>
                         <button type="submit"
                             class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -37,7 +37,7 @@
                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            Add new product
+                            Add new outcoming
                             <div wire:loading>
                                 <svg aria-hidden="true" role="status"
                                     class="inline w-4 h-4 me-3 text-gray-200 animate-spin dark:text-gray-600"
@@ -56,12 +56,8 @@
             @endteleport
         </div>
         <div class="flex gap-3">
-            {{-- Yang aku tambahkan --}}
-
-            <input wire:model.debounce.500ms="search" type="text" placeholder="Search..."
+            <input wire:model.live="search" type="text" placeholder="Search..."
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-
-            {{-- Yang aku tambahkan --}}
         </div>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -75,7 +71,7 @@
                         Product Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Unit
+                        Quantity
                     </th>
                 </tr>
             </thead>
@@ -92,10 +88,30 @@
                                 {{ $i++ }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $outcoming->name }}
+                                {{ $outcoming->item->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $outcoming->unit }}
+                                {{ $outcoming->item->quantity }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div>
+                                    <x-button type="button" color="red" data-modal-target="delete-outcoming-modal"
+                                    data-modal-toggle="delete-outcoming-modal">Delete</x-button>
+                                    <x-modal method="delete({{ $outcoming->id }})" id="delete-outcoming-modal">
+                                        <x-slot name="title">
+                                            Delete Data
+                                        </x-slot>
+                                        <x-slot name="content">
+                                            <p class="text-xl text-center mb-3">
+                                                Are you sure want to delete this data ?
+                                            </p>
+                                            <div class="flex justify-center items-center gap-3 pt-3">
+                                                <x-button type="submit" color="danger" data-modal-toggle="delete-outcoming-modal">Delete</x-button>
+                                                <x-button type="button" color="primary" data-modal-toggle="delete-outcoming-modal">No</x-button>
+                                            </div>
+                                        </x-slot>
+                                    </x-modal>
+                                </div>
                             </td>
                         </tr>
                     </div>
