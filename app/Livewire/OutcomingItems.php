@@ -20,11 +20,11 @@ class OutcomingItems extends Component
     public function delete($id) {
         $itemsQty = ModelsOutcomingItems::where('item_id', $id)->first();
 
-        $barang = Barang::findOrFail($id);
+        $items = Barang::findOrFail($id);
 
-        $oldQuantity = $barang->quantity + $itemsQty->quantity;
+        $oldQuantity = $items->quantity + $itemsQty->quantity;
 
-        $barang->update(['quantity' => $oldQuantity]);
+        $items->update(['quantity' => $oldQuantity]);
 
         ModelsOutComingItems::where('item_id', $id)->delete();
 

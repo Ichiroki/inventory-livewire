@@ -31,7 +31,7 @@ class OutcomingForm extends Form
 
         DB::table('outcomings')->insert([
             'item_id' => $validated['item_id'],
-            'quantity' => $newQuantity
+            'quantity' => $validated['quantity'],
         ]);
 
         $item->update(['quantity' => $newQuantity]);
