@@ -13,7 +13,7 @@ use Livewire\Form;
 class IncomingForm extends Form
 {
     public $item;
-    public int $item_id = 1;
+    public $item_id;
     public $quantity;
 
     public function rules() {
@@ -22,7 +22,8 @@ class IncomingForm extends Form
                 'required',
                 ValidationRule::exists('items', 'id'),
             ],
-            'quantity' => 'required|integer|min:1'
+            // 'oldQuantity' => 'required|integer|min:1',
+            'quantity' => 'required|integer|min:1',
         ];
     }
 
@@ -34,9 +35,8 @@ class IncomingForm extends Form
         ];
     }
 
-    public function mount(int $quantity) {
+    public function mount() {
         $this->item = Barang::all();
-        $this->quantity = $quantity;
     }
 
     public function store() {
@@ -47,9 +47,11 @@ class IncomingForm extends Form
 
             $newQuantity = $item->quantity + $validated['quantity'];
 
+            // dd($newQuantity);
+
             DB::table('incomings')->insert([
                 'item_id' => $validated['item_id'],
-                'quantity' => $newQuantity
+                'quantity' => $validated['quantity'],
             ]);
 
             $item->update(['quantity' => $newQuantity]);

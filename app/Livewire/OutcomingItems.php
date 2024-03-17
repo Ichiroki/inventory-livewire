@@ -22,8 +22,6 @@ class OutcomingItems extends Component
 
         $barang = Barang::findOrFail($id);
 
-        // dd($itemsQty->quantity);
-
         $oldQuantity = $barang->quantity + $itemsQty->quantity;
 
         $barang->update(['quantity' => $oldQuantity]);

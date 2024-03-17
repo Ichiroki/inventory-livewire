@@ -98,13 +98,13 @@
                                 {{ $incoming->item->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $incoming->quantity }}
+                                {{ $incoming->item->quantity }}
                             </td>
                             <td class="px-6 py-4">
                                 <div>
                                     <x-button type="button" color="red" data-modal-target="delete-incoming-modal"
                                     data-modal-toggle="delete-incoming-modal">Delete</x-button>
-                                    <x-modal method="delete({{ $incoming->id }})" id="delete-incoming-modal">
+                                    <x-modal method="delete({{ $incoming->item_id }})" id="delete-incoming-modal">
                                         <x-slot name="title">
                                             Delete Data
                                         </x-slot>

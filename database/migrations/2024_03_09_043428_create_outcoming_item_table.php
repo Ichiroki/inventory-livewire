@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('outcomings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('item_id')->unique();
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('item_id')->references('id')->on('items')->restrictOnDelete();
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 

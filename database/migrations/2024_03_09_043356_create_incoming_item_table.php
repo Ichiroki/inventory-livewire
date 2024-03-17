@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('item_id')->references('id')->on('items')->cascadeOnUpdate();
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 
