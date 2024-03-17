@@ -16,7 +16,7 @@ class OutcomingItems extends Model
         'quantity'
     ];
 
-    public function items() {
+    public function item() {
         return $this->belongsTo(Barang::class);
     }
 }

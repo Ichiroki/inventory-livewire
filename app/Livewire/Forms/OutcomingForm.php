@@ -12,14 +12,14 @@ class OutcomingForm extends Form
     public $item;
 
     #[Validate('required')]
-    public int $item_id;
+    public $item_id;
 
     #[Validate('required')]
-    public int $qty;
+    public $quantity;
 
-    public function mount(int $qty) {
+    public function mount($quantity) {
         $this->item = Barang::all();
-        $this->qty = $qty;
+        $this->quantity = $quantity;
     }
 
     public function store() {
@@ -29,9 +29,9 @@ class OutcomingForm extends Form
 
         $newQuantity = $item->quantity - $validated['quantity'];
 
-        DB::table('incomings')->insert([
+        DB::table('outcomings')->insert([
             'item_id' => $validated['item_id'],
-            'quantity' => $newQuantity
+            'quantity' => $validated['quantity'],
         ]);
 
         $item->update(['quantity' => $newQuantity]);

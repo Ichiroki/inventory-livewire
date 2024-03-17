@@ -16,7 +16,17 @@ class Incoming extends Component
     }
 
     public function delete($id) {
-        ModelsIncoming::where('id', $id)->delete();
+        $itemsQty = ModelsIncoming::where('item_id', $id)->first();
+
+        $items = Barang::findOrFail($id);
+
+        $oldQuantity = $items->quantity - $itemsQty->quantity;
+
+        // dd($oldQuantity);
+
+        $items->update(['quantity' => $oldQuantity]);
+
+        ModelsIncoming::where('item_id', $id)->delete();
 
         $this->reset();
     }
